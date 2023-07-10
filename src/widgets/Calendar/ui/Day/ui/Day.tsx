@@ -36,12 +36,12 @@ export function Day({ day, tasks, publicEvents }: DayProps) {
         borderColor: isOver ? 'green' : undefined,
         backgroundColor: isOver ? 'green' : undefined,
       }}
-      className="relative group border p-1 h-20 w-20 overflow-visible transition cursor-pointer duration-500 ease hover:bg-gray-300"
+      className="relative group border p-1 h-20 w-20 overflow-visible transition cursor-pointer duration-300 ease hover:bg-gray-100"
     >
       <Button
         onClick={onClickPlus}
         theme="ghost"
-        className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute -right-2 top-0 opacity-0 group-hover:opacity-100 transition-opacity"
       >
         <PlusIcon className="w-4 h-4" />
       </Button>
