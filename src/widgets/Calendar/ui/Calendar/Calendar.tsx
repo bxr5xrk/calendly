@@ -7,6 +7,7 @@ const dateNow = dayjs();
 
 export function Calendar() {
   const [currentDate, setCurrentDate] = useState(dateNow);
+
   return (
     <div className="bg-white rounded shadow w-full">
       <CalendarHeader />

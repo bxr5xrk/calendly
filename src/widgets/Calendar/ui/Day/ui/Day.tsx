@@ -1,13 +1,11 @@
-import { useDraggable, useDroppable } from '@dnd-kit/core';
+import { useDroppable } from '@dnd-kit/core';
 import {
   SortableContext,
-  useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { PublicEvent } from '@entities/PublicEvent';
+import { Task, TaskItem } from '@entities/Task';
 import { Dayjs } from 'dayjs';
-import { PublicEvent } from '../../../model/service/publicEvents';
-import { type Task, TaskId } from '../../../model/types/calendar';
 
 interface DayProps {
   day: Dayjs;
@@ -18,7 +16,7 @@ interface DayProps {
 export function Day({ day, tasks, publicEvents }: DayProps) {
   const { isOver, setNodeRef } = useDroppable({
     id: day.format('YYYY-MM-DD'),
-    data: { isPlette: true },
+    data: { isDay: true },
   });
 
   return (
@@ -40,7 +38,7 @@ export function Day({ day, tasks, publicEvents }: DayProps) {
       <div className="bottom flex-grow py-1 w-full cursor-pointer">
         <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
           {tasks.map((i) => (
-            <Task key={i.id} id={i.id} date={i.day} title={i.title} />
+            <TaskItem key={i.id} id={i.id} date={i.day} title={i.title} />
           ))}
         </SortableContext>
 

@@ -1,8 +1,8 @@
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
+import { usePublicEvents } from '@entities/PublicEvent';
+import { useTasksStore } from '@entities/Task';
 import * as dayjs from 'dayjs';
-import { useTasksStore } from '../../../../../entities/Task/model/store/taskStore';
-import { usePublicEvents } from '../../../model/service/publicEvents';
 import { Day } from '../../Day/ui/Day';
 import { getCurrentDaysInMonth } from '../lib/monthUtils';
 import { MonthHeader } from './MonthHeader/MonthHeader';
@@ -52,11 +52,7 @@ export function Month({ day }: MonthProps) {
     }
 
     // sorting
-    if (
-      // activeDay === over.id &&
-      active.data.current?.isTask &&
-      over.data.current?.isTask
-    ) {
+    if (active.data.current?.isTask && over.data.current?.isTask) {
       if (active.id !== over.id) {
         const oldIndex = tasks.findIndex((i) => i.id === active.id);
         const newIndex = tasks.findIndex((i) => i.id === over.id);
@@ -68,11 +64,10 @@ export function Month({ day }: MonthProps) {
     }
 
     // dragging
-    if (over.data.current?.isPlette) {
+    if (over.data.current?.isDay) {
       setTasks(
         tasks.map((task) => {
           if (task.id === activeId) {
-            // console.log(task, over);
             return { ...task, day: String(over.id) };
           }
           return task;
