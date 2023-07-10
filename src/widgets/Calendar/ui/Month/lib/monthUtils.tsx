@@ -32,7 +32,7 @@ export const getCurrentDaysInMonth = (date: dayjs.Dayjs): dayjs.Dayjs[] => {
   return daysInMonth;
 };
 
-const currentDate = dayjs();
-
-export const isDateInCurrentMonth = (date: dayjs.Dayjs): boolean =>
-  date.month() === currentDate.month() && date.year() === currentDate.year();
+export const isDateInCurrentMonth = (
+  date: dayjs.Dayjs,
+  month: dayjs.Dayjs
+): boolean => date.month() === month.month() && date.year() === month.year();

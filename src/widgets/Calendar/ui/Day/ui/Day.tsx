@@ -34,15 +34,13 @@ export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
   return (
     <td
       ref={setNodeRef}
-      style={{
-        borderColor: isOver ? 'green' : undefined,
-        backgroundColor: isOver ? 'green' : undefined,
-      }}
       className={cl(
-        'relative group border p-1 h-32 w-32 overflow-visible transition cursor-pointer duration-300 ease hover:bg-gray-100',
-        !isCurrentMonth && 'bg-gray-100'
+        'relative group border p-1 h-32 w-32 overflow-visible transition cursor-pointer duration-300 ease hover:bg-gray-50',
+        !isCurrentMonth && 'bg-gray-100',
+        isOver && 'bg-gray-300'
       )}
     >
+      {/* add task button */}
       <Button
         onClick={onClickPlus}
         theme="ghost"
@@ -51,29 +49,28 @@ export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
         <PlusIcon className="w-4 h-4" />
       </Button>
 
-      <div className="flex flex-col h-32 w-32 mx-auto overflow-visible">
-        <div className="top h-5 w-full">
+      <div className="grid grid-cols-1 h-full grid-rows-autoFr">
+        <div className=" mx-auto overflow-visible">
           <span className="text-gray-500 text-sm">{day.date()}</span>
         </div>
-        <div className="bottom flex-grow py-1 w-full cursor-pointer"></div>
-      </div>
 
-      <div className="bottom flex-grow py-1 w-full cursor-pointer">
-        <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
-          {tasks.map((i) => (
-            <TaskItem
-              key={i.id}
-              id={i.id}
-              date={i.day}
-              title={i.title}
-              labels={i.labels}
-            />
+        <div className="bottom flex-grow py-1 w-full cursor-pointer">
+          <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
+            {tasks.map((i) => (
+              <TaskItem
+                key={i.id}
+                id={i.id}
+                date={i.day}
+                title={i.title}
+                labels={i.labels}
+              />
+            ))}
+          </SortableContext>
+
+          {publicEvents.map((i, index) => (
+            <PublicEventItem key={index} name={i.name} />
           ))}
-        </SortableContext>
-
-        {publicEvents.map((i) => (
-          <PublicEventItem name={i.name} date={i.date} />
-        ))}
+        </div>
       </div>
     </td>
   );

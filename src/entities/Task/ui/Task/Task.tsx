@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Label, ListLabels } from '@entities/Label';
+import { Label, ListLabelsReadonly } from '@entities/Label';
 import { useTasksStore } from '@entities/Task/model/store/taskStore';
 import { Button } from '@shared/ui/Button';
 import { XIcon } from 'lucide-react';
@@ -40,6 +40,7 @@ export function Task({ id, date, title, labels }: TaskProps) {
       ? `translate3d(${transformDrag.x}px, ${transformDrag.y}px, 0)`
       : CSS.Transform.toString(transformSort),
     transition,
+    zIndex: 1000,
   };
 
   const onRemove = () => setTasks(tasks.filter((i) => i.id !== id));
@@ -53,24 +54,24 @@ export function Task({ id, date, title, labels }: TaskProps) {
         {...listenersDrag}
         {...attributesDrag}
         {...listenersSort}
-        className="peer bg-purple-400 text-white rounded p-1 text-sm mb-1"
+        className="text-gray-600 border-purple-200 bg-purple-100 border rounded p-1 text-sm mb-1"
       >
-        <div className="w-full h-full" ref={setNodeRefDrag}>
-          <ListLabels labels={labels} />
+        <div className="group/item w-full h-full" ref={setNodeRefDrag}>
+          <ListLabelsReadonly labels={labels} />
           <span className="">{title}</span>
-          <span className="time">{date}</span>
+
+          <Button
+            className="absolute opacity-0 group-hover/item:opacity-100 hover:opacity-100 z-1 -top-2 -right-2 p-0.5 rounded-full bg-red-100 text-red-500"
+            theme="clear"
+            size="clear"
+            onClick={onRemove}
+          >
+            <XIcon className="w-3 h-3 stroke-current" />
+          </Button>
         </div>
       </div>
 
       {/* remove button */}
-      <Button
-        className="absolute opacity-0 peer-hover:opacity-100 hover:opacity-100 z-1 -top-2 -right-2 p-0.5 rounded-full bg-red-100 text-red-500"
-        theme="clear"
-        size="clear"
-        onClick={onRemove}
-      >
-        <XIcon className="w-3 h-3 stroke-current" />
-      </Button>
     </div>
   );
 }

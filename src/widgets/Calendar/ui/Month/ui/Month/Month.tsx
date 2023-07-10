@@ -2,6 +2,7 @@ import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { usePublicEvents } from '@entities/PublicEvent';
 import { useTasksStore } from '@entities/Task';
+import { FilteredTasksByLabel } from '@widgets/Calendar/lib/useFilteredTasks';
 import * as dayjs from 'dayjs';
 import { Day } from '../../../Day/ui/Day';
 import {
@@ -87,22 +88,24 @@ export function Month({ day }: MonthProps) {
         <tbody>
           {weeks.map((week, index) => (
             <tr key={index} className="text-center h-20">
-              {week.map((day) => {
+              {week.map((date) => {
                 const matchTasks = tasks.filter((task) =>
-                  dayjs(task.day).isSame(day)
+                  dayjs(task.day).isSame(date)
                 );
+
+                const filteredTasks = FilteredTasksByLabel(matchTasks);
 
                 const matchPublicEvents =
                   publicEvents?.filter((event) =>
-                    dayjs(event.date).isSame(day)
+                    dayjs(event.date).isSame(date)
                   ) ?? [];
 
                 return (
                   <Day
-                    isCurrentMonth={isDateInCurrentMonth(day)}
-                    day={day}
-                    key={day.format()}
-                    tasks={matchTasks}
+                    isCurrentMonth={isDateInCurrentMonth(date, day)}
+                    day={date}
+                    key={date.format()}
+                    tasks={filteredTasks}
                     publicEvents={matchPublicEvents}
                   />
                 );
@@ -110,6 +113,8 @@ export function Month({ day }: MonthProps) {
             </tr>
           ))}
         </tbody>
+
+              
       </DndContext>
     </table>
   );

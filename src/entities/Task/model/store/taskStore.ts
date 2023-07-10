@@ -5,6 +5,7 @@ interface TasksState {
   tasks: Task[];
   setTasks: (data: Task[]) => void;
   onAppend: (task: Task) => void;
+  graggableTask: Task | null;
 }
 
 export const useTasksStore = create<TasksState>()((set) => ({
@@ -15,6 +16,7 @@ export const useTasksStore = create<TasksState>()((set) => ({
       title: 'some title',
       labels: [
         {
+          id: '14',
           title: 'title 1',
           color: 'red',
         },
@@ -26,6 +28,7 @@ export const useTasksStore = create<TasksState>()((set) => ({
       title: 'some title 2',
       labels: [
         {
+          id: '432',
           title: 'title 2',
           color: 'blue',
         },
