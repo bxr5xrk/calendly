@@ -9,6 +9,10 @@ export function ListLabels() {
 
   const onRemove = (id: string) => {
     setLabels(labels.filter((i) => i.id !== id));
+
+    if (filterIds.includes(id)) {
+      setFilterIds(filterIds.filter((i) => i !== id));
+    }
   };
 
   const setChecked = (label: Label) => {

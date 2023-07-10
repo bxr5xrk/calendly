@@ -9,9 +9,9 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { Label } from '@entities/Label';
 import { usePublicEvents } from '@entities/PublicEvent';
 import { TaskItem, useTasksStore } from '@entities/Task';
-import { useSearchStore } from '@features/TaskSearch';
+import { FilteredTasksBySearch } from '@widgets/Calendar/lib/FilteredTasksBySearch';
 import { splitArray } from '@widgets/Calendar/lib/splitArray';
-import { FilteredTasksByLabel } from '@widgets/Calendar/lib/useFilteredTasks';
+import { FilteredTasksByLabel } from '@widgets/Calendar/lib/FilteredTasksByLabel';
 import * as dayjs from 'dayjs';
 import { Day } from '../../../Day/ui/Day';
 import {
@@ -27,7 +27,6 @@ interface MonthProps {
 export function Month({ day }: MonthProps) {
   const { tasks, setTasks, draggableTask, setDraggableTask } = useTasksStore();
   const days = getCurrentDaysInMonth(day);
-  const { query } = useSearchStore();
   const { data: publicEvents } = usePublicEvents();
 
   const weeks = splitArray(days);
@@ -99,7 +98,7 @@ export function Month({ day }: MonthProps) {
 
                 const filteredTasks = FilteredTasksByLabel(matchTasks);
 
-                const filteredBySearch = 
+                const filteredBySearch = FilteredTasksBySearch(filteredTasks);
 
                 const matchPublicEvents =
                   publicEvents?.filter((event) =>
@@ -111,7 +110,7 @@ export function Month({ day }: MonthProps) {
                     isCurrentMonth={isDateInCurrentMonth(date, day)}
                     day={date}
                     key={date.format()}
-                    tasks={filteredTasks}
+                    tasks={filteredBySearch}
                     publicEvents={matchPublicEvents}
                   />
                 );
