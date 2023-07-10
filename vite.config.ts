@@ -10,6 +10,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@entities': '/src/entities',
+      '@shared': '/src/shared',
+      '@features': '/src/features',
+      '@widgets': '/src/widgets',
     },
   },
 });

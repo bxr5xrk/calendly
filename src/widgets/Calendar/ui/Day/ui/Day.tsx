@@ -3,9 +3,12 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { PublicEvent } from '@entities/PublicEvent';
+import { PublicEvent, PublicEventItem } from '@entities/PublicEvent';
 import { Task, TaskItem } from '@entities/Task';
+import { useCreateTaskModalStore } from '@features/CreteTask';
+import { Button } from '@shared/ui/Button';
 import { Dayjs } from 'dayjs';
+import { PlusIcon } from 'lucide-react';
 
 interface DayProps {
   day: Dayjs;
@@ -14,10 +17,17 @@ interface DayProps {
 }
 
 export function Day({ day, tasks, publicEvents }: DayProps) {
+  const { setOpen, setDate } = useCreateTaskModalStore();
+
   const { isOver, setNodeRef } = useDroppable({
     id: day.format('YYYY-MM-DD'),
     data: { isDay: true },
   });
+
+  const onClickPlus = () => {
+    setOpen(true);
+    setDate(day.format('YYYY-MM-DD'));
+  };
 
   return (
     <td
@@ -26,9 +36,17 @@ export function Day({ day, tasks, publicEvents }: DayProps) {
         borderColor: isOver ? 'green' : undefined,
         backgroundColor: isOver ? 'green' : undefined,
       }}
-      className="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-visible transition cursor-pointer duration-500 ease hover:bg-gray-300"
+      className="relative group border p-1 h-20 w-20 overflow-visible transition cursor-pointer duration-500 ease hover:bg-gray-300"
     >
-      <div className="flex flex-col h-40 xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-visible">
+      <Button
+        onClick={onClickPlus}
+        theme="ghost"
+        className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity"
+      >
+        <PlusIcon className="w-4 h-4" />
+      </Button>
+
+      <div className="flex flex-col h-20 w-20 mx-auto overflow-visible">
         <div className="top h-5 w-full">
           <span className="text-gray-500 text-sm">{day.date()}</span>
         </div>
@@ -43,12 +61,7 @@ export function Day({ day, tasks, publicEvents }: DayProps) {
         </SortableContext>
 
         {publicEvents.map((i) => (
-          <div className="event bg-purple-400 text-white rounded p-1 text-sm mb-1">
-            <div className="w-full h-full">
-              <span className="event-name">{i.name}</span>
-              <span className="time">{i.date}</span>
-            </div>
-          </div>
+          <PublicEventItem name={i.name} date={i.date} />
         ))}
       </div>
     </td>
