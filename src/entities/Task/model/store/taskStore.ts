@@ -10,32 +10,7 @@ interface TasksState {
 }
 
 export const useTasksStore = create<TasksState>()((set) => ({
-  tasks: [
-    {
-      id: '3456789987',
-      day: '2023-07-10',
-      title: 'some title',
-      labels: [
-        {
-          id: '14',
-          title: 'title 1',
-          color: 'red',
-        },
-      ],
-    },
-    {
-      id: '8765432345',
-      day: '2023-07-10',
-      title: 'some title 2',
-      labels: [
-        {
-          id: '432',
-          title: 'title 2',
-          color: 'blue',
-        },
-      ],
-    },
-  ],
+  tasks: [],
   draggableTask: null,
   setDraggableTask: (data) => set(() => ({ draggableTask: data })),
   setTasks: (data) => set(() => ({ tasks: data })),
