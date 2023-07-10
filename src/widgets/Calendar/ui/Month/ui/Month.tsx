@@ -54,8 +54,8 @@ export function Month({ day }: MonthProps) {
     // sorting
     if (
       // activeDay === over.id &&
-      active.data.current?.isDay &&
-      over.data.current?.isDay
+      active.data.current?.isTask &&
+      over.data.current?.isTask
     ) {
       if (active.id !== over.id) {
         const oldIndex = tasks.findIndex((i) => i.id === active.id);

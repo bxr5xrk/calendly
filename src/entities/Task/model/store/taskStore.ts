@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Task } from '../../../../widgets/Calendar/model/types/calendar';
+import { Task } from '../types/task';
 
 interface TasksState {
   tasks: Task[];
