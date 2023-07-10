@@ -1,5 +1,9 @@
+import { getTasksFromLS } from "./../../lib/LS";
+import { saveTasksToLS } from '@entities/Task/lib/LS';
 import { create } from 'zustand';
 import { Task } from '../types/task';
+
+const tasksFromLS = getTasksFromLS()
 
 interface TasksState {
   tasks: Task[];
@@ -10,9 +14,19 @@ interface TasksState {
 }
 
 export const useTasksStore = create<TasksState>()((set) => ({
-  tasks: [],
+  tasks: tasksFromLS ?? [],
   draggableTask: null,
   setDraggableTask: (data) => set(() => ({ draggableTask: data })),
-  setTasks: (data) => set(() => ({ tasks: data })),
-  onAppend: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+  setTasks: (data) =>
+    set(() => {
+      saveTasksToLS(data);
+
+      return { tasks: data };
+    }),
+  onAppend: (task) =>
+    set((state) => {
+      saveTasksToLS([...state.tasks, task]);
+
+      return { tasks: [...state.tasks, task] };
+    }),
 }));
