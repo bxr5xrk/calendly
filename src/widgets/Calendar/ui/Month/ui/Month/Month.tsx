@@ -1,7 +1,15 @@
-import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+} from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
+import { Label } from '@entities/Label';
 import { usePublicEvents } from '@entities/PublicEvent';
-import { useTasksStore } from '@entities/Task';
+import { TaskItem, useTasksStore } from '@entities/Task';
+import { splitArray } from '@widgets/Calendar/lib/splitArray';
 import { FilteredTasksByLabel } from '@widgets/Calendar/lib/useFilteredTasks';
 import * as dayjs from 'dayjs';
 import { Day } from '../../../Day/ui/Day';
@@ -15,28 +23,8 @@ interface MonthProps {
   day: dayjs.Dayjs;
 }
 
-function splitArray(arr: dayjs.Dayjs[]) {
-  const result = [];
-  const chunkSize = 7;
-
-  for (let i = 0; i < arr.length; i += chunkSize) {
-    result.push(arr.slice(i, i + chunkSize));
-  }
-
-  // Pad the last array with null values if needed
-  // const lastArray = result[result.length - 1];
-  // if (lastArray.length < chunkSize) {
-  // const paddingLength = chunkSize - lastArray.length;
-  // for (let i = 0; i < paddingLength; i++) {
-  //   lastArray.push(null);
-  // }
-  // }
-
-  return result;
-}
-
 export function Month({ day }: MonthProps) {
-  const { tasks, setTasks } = useTasksStore();
+  const { tasks, setTasks, draggableTask, setDraggableTask } = useTasksStore();
   const days = getCurrentDaysInMonth(day);
 
   const { data: publicEvents } = usePublicEvents();
@@ -44,6 +32,8 @@ export function Month({ day }: MonthProps) {
   const weeks = splitArray(days);
 
   const onDragEnd = (e: DragEndEvent) => {
+    setDraggableTask(null);
+
     const active = e.active;
     const over = e.over;
 
@@ -80,17 +70,30 @@ export function Month({ day }: MonthProps) {
     }
   };
 
+  const onDragStart = (e: DragStartEvent) => {
+    setDraggableTask({
+      id: String(e.active.id),
+      labels: e.active.data.current?.labels as Label[],
+      title: e.active.data.current?.title as string,
+      day: e.active.data.current?.day as string,
+    });
+  };
+
   return (
     <table className="w-full">
       <MonthHeader />
 
-      <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+      <DndContext
+        collisionDetection={closestCenter}
+        onDragEnd={onDragEnd}
+        onDragStart={onDragStart}
+      >
         <tbody>
           {weeks.map((week, index) => (
             <tr key={index} className="text-center h-20">
               {week.map((date) => {
-                const matchTasks = tasks.filter((task) =>
-                  dayjs(task.day).isSame(date)
+                const matchTasks = tasks.filter(
+                  (task) => task.day === date.format('YYYY-MM-DD')
                 );
 
                 const filteredTasks = FilteredTasksByLabel(matchTasks);
@@ -114,7 +117,16 @@ export function Month({ day }: MonthProps) {
           ))}
         </tbody>
 
-              
+        <DragOverlay>
+          {draggableTask ? (
+            <TaskItem
+              id={draggableTask.id}
+              date={draggableTask.day}
+              title={draggableTask.title}
+              labels={draggableTask.labels || []}
+            />
+          ) : null}
+        </DragOverlay>
       </DndContext>
     </table>
   );

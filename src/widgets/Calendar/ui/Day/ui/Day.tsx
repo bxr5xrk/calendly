@@ -66,7 +66,6 @@ export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
               />
             ))}
           </SortableContext>
-
           {publicEvents.map((i, index) => (
             <PublicEventItem key={index} name={i.name} />
           ))}

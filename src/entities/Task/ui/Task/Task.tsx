@@ -33,12 +33,11 @@ export function Task({ id, date, title, labels }: TaskProps) {
     setNodeRef: setNodeRefSort,
     transform: transformSort,
     transition,
-  } = useSortable({ id, data: { isTask: true } });
+  } = useSortable({ id, data: { isTask: true, labels, title } });
 
   const style = {
-    transform: transformDrag
-      ? `translate3d(${transformDrag.x}px, ${transformDrag.y}px, 0)`
-      : CSS.Transform.toString(transformSort),
+    opacity: transformDrag ? 0 : undefined,
+    transform: CSS.Transform.toString(transformSort),
     transition,
     zIndex: 1000,
   };
@@ -56,10 +55,14 @@ export function Task({ id, date, title, labels }: TaskProps) {
         {...listenersSort}
         className="text-gray-600 border-purple-200 bg-purple-100 border rounded p-1 text-sm mb-1"
       >
-        <div className="group/item w-full h-full" ref={setNodeRefDrag}>
+        <div
+          className="group/item w-full h-full text-center"
+          ref={setNodeRefDrag}
+        >
           <ListLabelsReadonly labels={labels} />
-          <span className="">{title}</span>
+          <span className="text-center">{title}</span>
 
+          {/* remove button */}
           <Button
             className="absolute opacity-0 group-hover/item:opacity-100 hover:opacity-100 z-1 -top-2 -right-2 p-0.5 rounded-full bg-red-100 text-red-500"
             theme="clear"
@@ -70,8 +73,6 @@ export function Task({ id, date, title, labels }: TaskProps) {
           </Button>
         </div>
       </div>
-
-      {/* remove button */}
     </div>
   );
 }
