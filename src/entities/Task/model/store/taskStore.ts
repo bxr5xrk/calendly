@@ -4,6 +4,7 @@ import { Task } from '../types/task';
 interface TasksState {
   tasks: Task[];
   setTasks: (data: Task[]) => void;
+  onAppend: (task: Task) => void;
 }
 
 export const useTasksStore = create<TasksState>()((set) => ({
@@ -30,4 +31,5 @@ export const useTasksStore = create<TasksState>()((set) => ({
     },
   ],
   setTasks: (data) => set(() => ({ tasks: data })),
+  onAppend: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
 }));
