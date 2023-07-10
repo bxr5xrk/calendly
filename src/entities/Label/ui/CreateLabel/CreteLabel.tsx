@@ -48,7 +48,7 @@ export function CreteLabel() {
 
       <SelectColorDropdown selected={color} setSelected={setColor} />
 
-      <Button theme="ghost" className="absolute -right-3" type="submit">
+      <Button theme="ghost" className="absolute right-2" type="submit">
         <ChevronRight className="w-5 h-5" />
       </Button>
     </form>

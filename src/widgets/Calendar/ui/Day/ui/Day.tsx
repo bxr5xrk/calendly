@@ -44,7 +44,7 @@ export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
       <Button
         onClick={onClickPlus}
         theme="ghost"
-        className="absolute -right-2 top-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute right-2 top-0 opacity-0 group-hover:opacity-100 transition-opacity"
       >
         <PlusIcon className="w-4 h-4" />
       </Button>

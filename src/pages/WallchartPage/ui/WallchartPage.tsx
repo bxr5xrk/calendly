@@ -15,7 +15,7 @@ export default function WallchartPage() {
 
       <Calendar />
 
-      <div className="fixed bottom-2 left-2 flex gap-1 items-center">
+      <div className="fixed bottom-3 left-3 flex gap-3 items-center">
         <ImportTasks />
 
         <ExportTasks />
