@@ -1,4 +1,5 @@
 import { Task, useTasksStore } from '@entities/Task';
+import { buttonVariants } from '@shared/ui/Button';
 import { Upload } from 'lucide-react';
 import { ChangeEvent } from 'react';
 
@@ -23,7 +24,13 @@ export function ImportTasks() {
 
   return (
     <div>
-      <label className="cursor-pointer p-2" htmlFor="fileInput">
+      <label
+        className={buttonVariants({
+          size: 'default',
+          className: 'cursor-pointer',
+        })}
+        htmlFor="fileInput"
+      >
         <Upload className="w-5 h-5" />
       </label>
       <input

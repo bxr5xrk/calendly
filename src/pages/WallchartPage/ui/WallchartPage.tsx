@@ -2,6 +2,7 @@ import { CreteLabel } from '@entities/Label/ui/CreateLabel/CreteLabel';
 import { ListLabels } from '@entities/Label/ui/ListLabels/ListLabels';
 import { ExportTasks } from '@features/ExportTasks';
 import { ImportTasks } from '@features/ImportTasks';
+import { TakeScreenshot } from '@features/TakeScreenshot';
 import { Calendar } from '../../../widgets/Calendar';
 
 export default function WallchartPage() {
@@ -14,14 +15,12 @@ export default function WallchartPage() {
 
       <Calendar />
 
-      <div className="fixed bottom-4 left-6 flex gap-2 items-center">
-        <div>
-          <ImportTasks />
-        </div>
+      <div className="fixed bottom-2 left-2 flex gap-1 items-center">
+        <ImportTasks />
 
-        <div>
-          <ExportTasks />
-        </div>
+        <ExportTasks />
+
+        <TakeScreenshot />
       </div>
     </div>
   );
