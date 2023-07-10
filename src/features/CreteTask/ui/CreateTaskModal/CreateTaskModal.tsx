@@ -63,6 +63,7 @@ export function CreateTaskModal() {
         <p className="text-sm text-gray-500">{date}</p>
 
         <Input
+          name="task-name"
           required
           minLength={2}
           ref={taskNameRef}

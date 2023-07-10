@@ -32,8 +32,12 @@ export function CreteLabel() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="relative w-52 flex space-x-2 items-center">
+    <form
+      onSubmit={onSubmit}
+      className="relative w-52 flex space-x-2 items-center"
+    >
       <Input
+        name="label-name"
         ref={labelNameRef}
         minLength={2}
         maxLength={20}

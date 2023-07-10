@@ -12,16 +12,16 @@ import { TaskItem, useTasksStore } from '@entities/Task';
 import { FilteredTasksBySearch } from '@widgets/Calendar/lib/FilteredTasksBySearch';
 import { splitArray } from '@widgets/Calendar/lib/splitArray';
 import { FilteredTasksByLabel } from '@widgets/Calendar/lib/FilteredTasksByLabel';
-import * as dayjs from 'dayjs';
 import { Day } from '../../../Day/ui/Day';
 import {
   getCurrentDaysInMonth,
   isDateInCurrentMonth,
 } from '../../lib/monthUtils';
 import { MonthHeader } from '../MonthHeader/MonthHeader';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface MonthProps {
-  day: dayjs.Dayjs;
+  day: Dayjs;
 }
 
 export function Month({ day }: MonthProps) {

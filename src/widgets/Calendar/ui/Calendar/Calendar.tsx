@@ -1,6 +1,6 @@
 import { CreateTaskModal } from '@features/CreteTask';
 import { ID_TO_CAPTURE } from '@features/TakeScreenshot';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import { CalendarHeader } from '../CalendarHeader/CalendarHeader';
 import { Month } from '../Month/ui/Month/Month';
