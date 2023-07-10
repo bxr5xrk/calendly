@@ -10,7 +10,7 @@ interface CalendarHeaderProps {
 export function CalendarHeader({ month, onChange }: CalendarHeaderProps) {
   return (
     <div className="w-full py-2">
-      <div className="mx-auto flex justify-between border-b items-center p-2 w-fit">
+      <div className="mx-auto flex justify-between items-center p-2 w-fit">
         <Button onClick={() => onChange('previous')} theme="ghost">
           <ChevronLeft className="w-5 h-5" />
         </Button>

@@ -1,6 +1,6 @@
-import { Dayjs } from 'dayjs';
+import * as dayjs from 'dayjs';
 
-export const getCurrentDaysInMonth = (date: Dayjs): Dayjs[] => {
+export const getCurrentDaysInMonth = (date: dayjs.Dayjs): dayjs.Dayjs[] => {
   const daysInMonth = [];
   const monthStart = date.startOf('month');
   const monthEnd = date.endOf('month');
@@ -31,3 +31,8 @@ export const getCurrentDaysInMonth = (date: Dayjs): Dayjs[] => {
 
   return daysInMonth;
 };
+
+const currentDate = dayjs();
+
+export const isDateInCurrentMonth = (date: dayjs.Dayjs): boolean =>
+  date.month() === currentDate.month() && date.year() === currentDate.year();

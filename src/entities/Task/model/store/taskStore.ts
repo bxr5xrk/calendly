@@ -15,6 +15,7 @@ export const useTasksStore = create<TasksState>()((set) => ({
       title: 'some title',
       labels: [
         {
+          title: 'title 1',
           color: 'red',
         },
       ],
@@ -25,6 +26,7 @@ export const useTasksStore = create<TasksState>()((set) => ({
       title: 'some title 2',
       labels: [
         {
+          title: 'title 2',
           color: 'blue',
         },
       ],

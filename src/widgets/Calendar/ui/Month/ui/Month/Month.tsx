@@ -3,9 +3,12 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { usePublicEvents } from '@entities/PublicEvent';
 import { useTasksStore } from '@entities/Task';
 import * as dayjs from 'dayjs';
-import { Day } from '../../Day/ui/Day';
-import { getCurrentDaysInMonth } from '../lib/monthUtils';
-import { MonthHeader } from './MonthHeader/MonthHeader';
+import { Day } from '../../../Day/ui/Day';
+import {
+  getCurrentDaysInMonth,
+  isDateInCurrentMonth,
+} from '../../lib/monthUtils';
+import { MonthHeader } from '../MonthHeader/MonthHeader';
 
 interface MonthProps {
   day: dayjs.Dayjs;
@@ -77,38 +80,37 @@ export function Month({ day }: MonthProps) {
   };
 
   return (
-    <>
-      <table className="w-full">
-        <MonthHeader />
+    <table className="w-full">
+      <MonthHeader />
 
-        <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-          <tbody>
-            {weeks.map((week, index) => (
-              <tr key={index} className="text-center h-20">
-                {week.map((day) => {
-                  const matchTasks = tasks.filter((task) =>
-                    dayjs(task.day).isSame(day)
-                  );
+      <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+        <tbody>
+          {weeks.map((week, index) => (
+            <tr key={index} className="text-center h-20">
+              {week.map((day) => {
+                const matchTasks = tasks.filter((task) =>
+                  dayjs(task.day).isSame(day)
+                );
 
-                  const matchPublicEvents =
-                    publicEvents?.filter((event) =>
-                      dayjs(event.date).isSame(day)
-                    ) ?? [];
+                const matchPublicEvents =
+                  publicEvents?.filter((event) =>
+                    dayjs(event.date).isSame(day)
+                  ) ?? [];
 
-                  return (
-                    <Day
-                      day={day}
-                      key={day.format()}
-                      tasks={matchTasks}
-                      publicEvents={matchPublicEvents}
-                    />
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </DndContext>
-      </table>
-    </>
+                return (
+                  <Day
+                    isCurrentMonth={isDateInCurrentMonth(day)}
+                    day={day}
+                    key={day.format()}
+                    tasks={matchTasks}
+                    publicEvents={matchPublicEvents}
+                  />
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </DndContext>
+    </table>
   );
 }

@@ -2,7 +2,7 @@ import { CreateTaskModal } from '@features/CreteTask';
 import * as dayjs from 'dayjs';
 import { useState } from 'react';
 import { CalendarHeader } from '../CalendarHeader/CalendarHeader';
-import { Month } from '../Month/ui/Month';
+import { Month } from '../Month/ui/Month/Month';
 
 const dateNow = dayjs();
 
@@ -16,12 +16,14 @@ export function Calendar() {
   };
 
   return (
-    <div className="bg-white rounded shadow w-full">
+    <div className="bg-white w-full max-w-7xl mx-auto">
       <CalendarHeader
         month={currentDate.format('MMMM, YYYY')}
         onChange={onChange}
       />
-      <Month day={currentDate} />
+      <div className="mb-10">
+        <Month day={currentDate} />
+      </div>
 
       <CreateTaskModal />
     </div>

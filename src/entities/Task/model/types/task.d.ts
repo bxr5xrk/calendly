@@ -1,3 +1,5 @@
+import { Label } from '@entities/Label';
+
 export interface Task {
   id: TaskId;
   day: string;
@@ -6,7 +8,3 @@ export interface Task {
 }
 
 export type TaskId = string;
-
-export interface Label {
-  color: string;
-}

@@ -6,6 +6,7 @@ import {
 import { PublicEvent, PublicEventItem } from '@entities/PublicEvent';
 import { Task, TaskItem } from '@entities/Task';
 import { useCreateTaskModalStore } from '@features/CreteTask';
+import { cl } from '@shared/lib/cl';
 import { Button } from '@shared/ui/Button';
 import { Dayjs } from 'dayjs';
 import { PlusIcon } from 'lucide-react';
@@ -14,9 +15,10 @@ interface DayProps {
   day: Dayjs;
   tasks: Task[];
   publicEvents: PublicEvent[];
+  isCurrentMonth: boolean;
 }
 
-export function Day({ day, tasks, publicEvents }: DayProps) {
+export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
   const { setOpen, setDate } = useCreateTaskModalStore();
 
   const { isOver, setNodeRef } = useDroppable({
@@ -36,7 +38,10 @@ export function Day({ day, tasks, publicEvents }: DayProps) {
         borderColor: isOver ? 'green' : undefined,
         backgroundColor: isOver ? 'green' : undefined,
       }}
-      className="relative group border p-1 h-20 w-20 overflow-visible transition cursor-pointer duration-300 ease hover:bg-gray-100"
+      className={cl(
+        'relative group border p-1 h-32 w-32 overflow-visible transition cursor-pointer duration-300 ease hover:bg-gray-100',
+        !isCurrentMonth && 'bg-gray-100'
+      )}
     >
       <Button
         onClick={onClickPlus}
@@ -46,7 +51,7 @@ export function Day({ day, tasks, publicEvents }: DayProps) {
         <PlusIcon className="w-4 h-4" />
       </Button>
 
-      <div className="flex flex-col h-20 w-20 mx-auto overflow-visible">
+      <div className="flex flex-col h-32 w-32 mx-auto overflow-visible">
         <div className="top h-5 w-full">
           <span className="text-gray-500 text-sm">{day.date()}</span>
         </div>
@@ -56,7 +61,13 @@ export function Day({ day, tasks, publicEvents }: DayProps) {
       <div className="bottom flex-grow py-1 w-full cursor-pointer">
         <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
           {tasks.map((i) => (
-            <TaskItem key={i.id} id={i.id} date={i.day} title={i.title} />
+            <TaskItem
+              key={i.id}
+              id={i.id}
+              date={i.day}
+              title={i.title}
+              labels={i.labels}
+            />
           ))}
         </SortableContext>
 

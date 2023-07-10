@@ -2,7 +2,7 @@ export function MonthHeader() {
   return (
     <thead>
       <tr>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+        <th className="p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
             Monday
           </span>
@@ -10,7 +10,7 @@ export function MonthHeader() {
             Mon
           </span>
         </th>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+        <th className="p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
             Tuesday
           </span>
@@ -18,7 +18,7 @@ export function MonthHeader() {
             Tue
           </span>
         </th>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+        <th className="p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
             Wednesday
           </span>
@@ -26,7 +26,7 @@ export function MonthHeader() {
             Wed
           </span>
         </th>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+        <th className="p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
             Thursday
           </span>
@@ -34,7 +34,7 @@ export function MonthHeader() {
             Thu
           </span>
         </th>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+        <th className="p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
             Friday
           </span>
@@ -42,7 +42,7 @@ export function MonthHeader() {
             Fri
           </span>
         </th>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+        <th className="p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
             Saturday
           </span>
@@ -50,7 +50,7 @@ export function MonthHeader() {
             Sat
           </span>
         </th>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+        <th className="p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
             Sunday
           </span>

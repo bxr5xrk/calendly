@@ -1,6 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { Label, ListLabels } from '@entities/Label';
 import { useTasksStore } from '@entities/Task/model/store/taskStore';
 import { Button } from '@shared/ui/Button';
 import { XIcon } from 'lucide-react';
@@ -10,9 +11,10 @@ interface TaskProps {
   id: TaskId;
   date: string;
   title: string;
+  labels: Label[];
 }
 
-export function Task({ id, date, title }: TaskProps) {
+export function Task({ id, date, title, labels }: TaskProps) {
   const { setTasks, tasks } = useTasksStore();
 
   const {
@@ -54,10 +56,13 @@ export function Task({ id, date, title }: TaskProps) {
         className="peer bg-purple-400 text-white rounded p-1 text-sm mb-1"
       >
         <div className="w-full h-full" ref={setNodeRefDrag}>
+          <ListLabels labels={labels} />
           <span className="">{title}</span>
           <span className="time">{date}</span>
         </div>
       </div>
+
+      {/* remove button */}
       <Button
         className="absolute opacity-0 peer-hover:opacity-100 hover:opacity-100 z-1 -top-2 -right-2 p-0.5 rounded-full bg-red-100 text-red-500"
         theme="clear"
