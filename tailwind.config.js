@@ -7,6 +7,9 @@ module.exports = {
       gridTemplateRows: {
         autoFr: 'auto 1fr',
       },
+      gridTemplateColumns: {
+        layout: '250px 1fr 250px',
+      },
     },
   },
   plugins: [],

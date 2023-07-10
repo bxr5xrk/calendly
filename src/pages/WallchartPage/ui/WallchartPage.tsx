@@ -6,7 +6,7 @@ import { Calendar } from '../../../widgets/Calendar';
 
 export default function WallchartPage() {
   return (
-    <div className="relative flex gap-10">
+    <div className="relative grid grid-cols-layout grid-rows-1">
       <div className="pt-5">
         <CreteLabel />
         <ListLabels />
