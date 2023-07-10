@@ -1,16 +1,25 @@
+import { Button } from '@shared/ui/Button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Action } from '../Calendar/Calendar';
 
-export function CalendarHeader() {
+interface CalendarHeaderProps {
+  month: string;
+  onChange: (action: Action) => void;
+}
+
+export function CalendarHeader({ month, onChange }: CalendarHeaderProps) {
   return (
-    <div className="header flex justify-between border-b p-2">
-      <span className="text-lg font-bold">2020 July</span>
-      <div className="buttons">
-        <button className="p-1">
+    <div className="w-full py-2">
+      <div className="mx-auto flex justify-between border-b items-center p-2 w-fit">
+        <Button onClick={() => onChange('previous')} theme="ghost">
           <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button className="p-1">
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        </Button>
+        <span className="text-lg font-bold w-40 text-center">{month}</span>
+        <div className="buttons">
+          <Button onClick={() => onChange('next')} theme="ghost">
+            <ChevronRight className="w-5 h-5" />
+          </Button>
+        </div>
       </div>
     </div>
   );

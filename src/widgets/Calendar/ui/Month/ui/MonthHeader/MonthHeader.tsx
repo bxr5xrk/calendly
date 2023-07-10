@@ -4,14 +4,6 @@ export function MonthHeader() {
       <tr>
         <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
           <span className="xl:block lg:block md:block sm:block hidden">
-            Sunday
-          </span>
-          <span className="xl:hidden lg:hidden md:hidden sm:hidden block">
-            Sun
-          </span>
-        </th>
-        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-          <span className="xl:block lg:block md:block sm:block hidden">
             Monday
           </span>
           <span className="xl:hidden lg:hidden md:hidden sm:hidden block">
@@ -56,6 +48,14 @@ export function MonthHeader() {
           </span>
           <span className="xl:hidden lg:hidden md:hidden sm:hidden block">
             Sat
+          </span>
+        </th>
+        <th className="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+          <span className="xl:block lg:block md:block sm:block hidden">
+            Sunday
+          </span>
+          <span className="xl:hidden lg:hidden md:hidden sm:hidden block">
+            Sun
           </span>
         </th>
       </tr>
