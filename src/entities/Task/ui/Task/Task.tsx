@@ -45,7 +45,7 @@ export function Task({ id, date, title, labels }: TaskProps) {
   const onRemove = () => setTasks(tasks.filter((i) => i.id !== id));
 
   return (
-    <div className="relative">
+    <div className="group/item relative">
       <div
         ref={setNodeRefSort}
         style={style}
@@ -56,23 +56,23 @@ export function Task({ id, date, title, labels }: TaskProps) {
         className="text-gray-600 border-purple-200 bg-purple-100 border rounded p-1 text-sm mb-1"
       >
         <div
-          className="group/item w-full h-full text-center"
+          className="w-full h-full text-center"
           ref={setNodeRefDrag}
         >
           <ListLabelsReadonly labels={labels} />
           <span className="text-center">{title}</span>
-
-          {/* remove button */}
-          <Button
-            className="absolute opacity-0 group-hover/item:opacity-100 hover:opacity-100 z-1 -top-2 -right-2 p-0.5 rounded-full bg-red-100 text-red-500"
-            theme="clear"
-            size="clear"
-            onClick={onRemove}
-          >
-            <XIcon className="w-3 h-3 stroke-current" />
-          </Button>
         </div>
       </div>
+
+      {/* remove button */}
+      <Button
+        className="absolute opacity-0 group-hover/item:opacity-100 hover:opacity-100 z-1 -top-2 -right-2 p-0.5 rounded-full bg-red-100 text-red-500"
+        theme="clear"
+        size="clear"
+        onClick={onRemove}
+      >
+        <XIcon className="w-3 h-3 stroke-current" />
+      </Button>
     </div>
   );
 }

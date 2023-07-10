@@ -11,9 +11,8 @@ export type Action = 'previous' | 'next';
 export function Calendar() {
   const [currentDate, setCurrentDate] = useState(dateNow);
 
-  const onChange = (action: Action) => {
+  const onChange = (action: Action) =>
     setCurrentDate(currentDate.add(action === 'next' ? 1 : -1, 'month'));
-  };
 
   return (
     <div className="bg-white w-full max-w-7xl mx-auto">

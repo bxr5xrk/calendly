@@ -9,6 +9,7 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { Label } from '@entities/Label';
 import { usePublicEvents } from '@entities/PublicEvent';
 import { TaskItem, useTasksStore } from '@entities/Task';
+import { useSearchStore } from '@features/TaskSearch';
 import { splitArray } from '@widgets/Calendar/lib/splitArray';
 import { FilteredTasksByLabel } from '@widgets/Calendar/lib/useFilteredTasks';
 import * as dayjs from 'dayjs';
@@ -26,7 +27,7 @@ interface MonthProps {
 export function Month({ day }: MonthProps) {
   const { tasks, setTasks, draggableTask, setDraggableTask } = useTasksStore();
   const days = getCurrentDaysInMonth(day);
-
+  const { query } = useSearchStore();
   const { data: publicEvents } = usePublicEvents();
 
   const weeks = splitArray(days);
@@ -97,6 +98,8 @@ export function Month({ day }: MonthProps) {
                 );
 
                 const filteredTasks = FilteredTasksByLabel(matchTasks);
+
+                const filteredBySearch = 
 
                 const matchPublicEvents =
                   publicEvents?.filter((event) =>
