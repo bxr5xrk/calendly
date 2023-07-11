@@ -1,4 +1,4 @@
-import { CreateTaskModal } from '@features/CreteTask';
+import { TaskModal } from '@features/CreteUpdateTask';
 import { ID_TO_CAPTURE } from '@features/TakeScreenshot';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -12,7 +12,6 @@ export type Action = 'previous' | 'next';
 export function Calendar() {
   const [currentDate, setCurrentDate] = useState(dateNow);
 
-
   const onChange = (action: Action) =>
     setCurrentDate(currentDate.add(action === 'next' ? 1 : -1, 'month'));
 
@@ -22,12 +21,12 @@ export function Calendar() {
         month={currentDate.format('MMMM, YYYY')}
         onChange={onChange}
       />
-     
+
       <div className="mb-10">
         <Month day={currentDate} />
       </div>
 
-      <CreateTaskModal />
+      <TaskModal />
     </div>
   );
 }

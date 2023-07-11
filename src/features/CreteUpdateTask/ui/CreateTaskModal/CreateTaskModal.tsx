@@ -7,12 +7,16 @@ import { Input } from '@shared/ui/Input';
 import { Modal } from '@shared/ui/Modal';
 import { useRef, useState } from 'react';
 import { createTask } from '../../lib/createTask';
-import { useCreateTaskModalStore } from '../../model/store/modalStore';
+import { useTaskModalStore } from '../../model/store/modalStore';
 
 export function CreateTaskModal() {
-  const { open, setOpen, date, setDate } = useCreateTaskModalStore();
+  const { taskParams, onReset } = useTaskModalStore();
+
+  const open = !!taskParams;
 
   const { labels } = useLabelsStore();
+
+  const date = taskParams?.day;
 
   const { onAppend } = useTasksStore();
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([]);
@@ -34,8 +38,7 @@ export function CreateTaskModal() {
 
       // reset
       taskNameRef.current.value = '';
-      setOpen(false);
-      setDate(null);
+      onReset();
       setSelectedLabels([]);
     }
   };
@@ -51,7 +54,7 @@ export function CreateTaskModal() {
   };
 
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal open={open} setOpen={() => ({})}>
       <form onSubmit={onSubmit} className="space-y-5">
         <Dialog.Title
           as="h3"

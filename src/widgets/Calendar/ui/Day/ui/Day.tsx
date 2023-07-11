@@ -5,7 +5,7 @@ import {
 } from '@dnd-kit/sortable';
 import { PublicEvent, PublicEventItem } from '@entities/PublicEvent';
 import { Task, TaskItem } from '@entities/Task';
-import { useCreateTaskModalStore } from '@features/CreteTask';
+import { useTaskModalStore } from '@features/CreteUpdateTask';
 import { cl } from '@shared/lib/cl';
 import { Button } from '@shared/ui/Button';
 import { Dayjs } from 'dayjs';
@@ -19,7 +19,7 @@ interface DayProps {
 }
 
 export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
-  const { setOpen, setDate } = useCreateTaskModalStore();
+  const { setTaskParams } = useTaskModalStore();
 
   const { isOver, setNodeRef } = useDroppable({
     id: day.format('YYYY-MM-DD'),
@@ -27,8 +27,9 @@ export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
   });
 
   const onClickPlus = () => {
-    setOpen(true);
-    setDate(day.format('YYYY-MM-DD'));
+    setTaskParams({
+      day: day.format('YYYY-MM-DD'),
+    });
   };
 
   return (

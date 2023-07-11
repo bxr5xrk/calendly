@@ -3,8 +3,9 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Label, ListLabelsReadonly } from '@entities/Label';
 import { useTasksStore } from '@entities/Task/model/store/taskStore';
+import { useTaskModalStore } from '@features/CreteUpdateTask';
 import { Button } from '@shared/ui/Button';
-import { XIcon } from 'lucide-react';
+import { Edit2Icon, GripVertical, XIcon } from 'lucide-react';
 import { TaskId } from '../../model/types/task';
 
 interface TaskProps {
@@ -16,6 +17,7 @@ interface TaskProps {
 
 export function Task({ id, date, title, labels }: TaskProps) {
   const { setTasks, tasks } = useTasksStore();
+  const { setTaskParams } = useTaskModalStore();
 
   const {
     attributes: attributesDrag,
@@ -42,10 +44,21 @@ export function Task({ id, date, title, labels }: TaskProps) {
     zIndex: 1000,
   };
 
+  const onEdit = () => {
+    setTaskParams({
+      id,
+      day: date,
+      title,
+      labels,
+    });
+  };
+
   const onRemove = () => setTasks(tasks.filter((i) => i.id !== id));
 
   return (
-    <div className="group/item relative">
+    <div className="group/item relative flex">
+      <GripVertical ref={setNodeRefDrag} className="w-5 h-5" />
+
       <div
         ref={setNodeRefSort}
         style={style}
@@ -55,14 +68,18 @@ export function Task({ id, date, title, labels }: TaskProps) {
         {...listenersSort}
         className="text-gray-600 border-purple-200 bg-purple-100 border rounded p-1 text-sm mb-1"
       >
-        <div
-          className="w-full h-full text-center"
-          ref={setNodeRefDrag}
-        >
+        <div className="w-full h-full text-center">
           <ListLabelsReadonly labels={labels} />
           <span className="text-center">{title}</span>
         </div>
       </div>
+
+      <Button
+        onClick={onEdit}
+        className="opacity-0 group-hover/item:opacity-100 transition"
+      >
+        <Edit2Icon className="w-5 h-5" />
+      </Button>
 
       {/* remove button */}
       <Button
