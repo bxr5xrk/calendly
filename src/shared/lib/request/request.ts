@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 export function request<T>(options: Record<string, unknown>): Promise<T> {
   const client = axios.create({
-    baseURL: 'https://date.nager.at/api/v3/PublicHolidays/',
+    baseURL: 'https://date.nager.at/api/v3/PublicHolidays/'
   });
 
   // request handler

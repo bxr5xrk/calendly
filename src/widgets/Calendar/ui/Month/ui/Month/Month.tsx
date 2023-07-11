@@ -3,7 +3,7 @@ import {
   DndContext,
   DragEndEvent,
   DragOverlay,
-  DragStartEvent,
+  DragStartEvent
 } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { Label } from '@entities/Label';
@@ -15,7 +15,7 @@ import { FilteredTasksByLabel } from '@widgets/Calendar/lib/FilteredTasksByLabel
 import { Day } from '../../../Day/ui/Day';
 import {
   getCurrentDaysInMonth,
-  isDateInCurrentMonth,
+  isDateInCurrentMonth
 } from '../../lib/monthUtils';
 import { MonthHeader } from '../MonthHeader/MonthHeader';
 import dayjs, { Dayjs } from 'dayjs';
@@ -75,7 +75,7 @@ export function Month({ day }: MonthProps) {
       id: String(e.active.id),
       labels: e.active.data.current?.labels as Label[],
       title: e.active.data.current?.title as string,
-      day: e.active.data.current?.day as string,
+      day: e.active.data.current?.day as string
     });
   };
 

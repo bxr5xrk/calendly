@@ -27,7 +27,7 @@ export function ImportTasks() {
       <label
         className={buttonVariants({
           size: 'default',
-          className: 'cursor-pointer',
+          className: 'cursor-pointer'
         })}
         htmlFor="fileInput"
       >

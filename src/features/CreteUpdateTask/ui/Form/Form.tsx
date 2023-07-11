@@ -7,7 +7,7 @@ import { Input } from '@shared/ui/Input';
 import { useState } from 'react';
 
 interface FormProps {
-  handleSubmit: (i:Omit<Task, 'id'>) => void;
+  handleSubmit: (i: Omit<Task, 'id'>) => void;
   initialTaskData: Omit<Task, 'id'>;
   title: string;
   buttonTitle: string;
@@ -17,7 +17,7 @@ export function Form({
   initialTaskData,
   handleSubmit,
   title,
-  buttonTitle,
+  buttonTitle
 }: FormProps) {
   const [taskName, setTaskName] = useState(initialTaskData.title);
 
@@ -25,7 +25,7 @@ export function Form({
 
   const { labels } = useLabelsStore();
   const [selectedLabels, setSelectedLabels] = useState<Label[]>([
-    ...initialTaskData.labels,
+    ...initialTaskData.labels
   ]);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,7 +34,7 @@ export function Form({
     handleSubmit({
       title: taskName,
       labels: selectedLabels,
-      day: date,
+      day: date
     });
 
     // reset
@@ -84,7 +84,7 @@ export function Form({
               border: `1px solid ${i.color}`,
               color: selectedLabels.map((i) => i.id).includes(i.id)
                 ? 'white'
-                : i.color,
+                : i.color
             }}
             key={i.id}
           >

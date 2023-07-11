@@ -5,5 +5,5 @@ type CreateTaskProps = Omit<Task, 'id'>;
 
 export const createTask = (data: CreateTaskProps): Task => ({
   ...data,
-  id: nanoid(8),
+  id: nanoid(8)
 });

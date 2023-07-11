@@ -6,7 +6,7 @@ export const usePublicEvents = () => {
   return useQuery({
     queryFn: () =>
       request<PublicEvent[]>({
-        url: '2023/UA',
-      }),
+        url: '2023/UA'
+      })
   });
 };

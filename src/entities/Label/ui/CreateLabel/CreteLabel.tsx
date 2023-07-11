@@ -22,7 +22,7 @@ export function CreteLabel() {
       onAppend({
         title,
         color,
-        id: nanoid(8),
+        id: nanoid(8)
       });
 
       // reset

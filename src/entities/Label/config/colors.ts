@@ -6,7 +6,7 @@ export const colors = [
   '#2563eb',
   '#7c3aed',
   '#44403c',
-  '#e11d48',
+  '#e11d48'
 ];
 
 export const initialColor = colors[0];

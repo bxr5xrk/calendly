@@ -1,7 +1,7 @@
 import { useDroppable } from '@dnd-kit/core';
 import {
   SortableContext,
-  verticalListSortingStrategy,
+  verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 import { PublicEvent, PublicEventItem } from '@entities/PublicEvent';
 import { Task, TaskItem } from '@entities/Task';
@@ -23,12 +23,12 @@ export function Day({ day, tasks, publicEvents, isCurrentMonth }: DayProps) {
 
   const { isOver, setNodeRef } = useDroppable({
     id: day.format('YYYY-MM-DD'),
-    data: { isDay: true },
+    data: { isDay: true }
   });
 
   const onClickPlus = () => {
     setTaskParams({
-      day: day.format('YYYY-MM-DD'),
+      day: day.format('YYYY-MM-DD')
     });
   };
 

@@ -26,5 +26,5 @@ export const useLabelsStore = create<LabelsState>()((set) => ({
       saveLabelsToLS([...state.labels, label]);
       return { labels: [...state.labels, label] };
     }),
-  setFilterIds: (data) => set(() => ({ filterIds: data })),
+  setFilterIds: (data) => set(() => ({ filterIds: data }))
 }));

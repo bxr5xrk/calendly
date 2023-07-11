@@ -36,7 +36,7 @@ export function ListLabels() {
                 ? i.color
                 : `${i.color}10`,
               border: `1px solid ${i.color}`,
-              color: filterIds.includes(i.id) ? 'white' : i.color,
+              color: filterIds.includes(i.id) ? 'white' : i.color
             }}
           >
             {i.title}

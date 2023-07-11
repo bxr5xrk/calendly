@@ -23,10 +23,10 @@ export function Task({ id, date, title, labels }: TaskProps) {
     attributes: attributesDrag,
     listeners: listenersDrag,
     setNodeRef: setNodeRefDrag,
-    transform: transformDrag,
+    transform: transformDrag
   } = useDraggable({
     id,
-    data: { day: date },
+    data: { day: date }
   });
 
   const {
@@ -34,14 +34,14 @@ export function Task({ id, date, title, labels }: TaskProps) {
     listeners: listenersSort,
     setNodeRef: setNodeRefSort,
     transform: transformSort,
-    transition,
+    transition
   } = useSortable({ id, data: { isTask: true, labels, title } });
 
   const style = {
     opacity: transformDrag ? 0 : undefined,
     transform: CSS.Transform.toString(transformSort),
     transition,
-    zIndex: 1000,
+    zIndex: 1000
   };
 
   const onEdit = () => {
@@ -49,7 +49,7 @@ export function Task({ id, date, title, labels }: TaskProps) {
       id,
       day: date,
       title,
-      labels,
+      labels
     });
   };
 

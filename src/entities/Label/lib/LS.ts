@@ -1,4 +1,4 @@
-import { Label } from "../model/types/label";
+import { Label } from '../model/types/label';
 
 const LS_KEY = 'task-labels';
 

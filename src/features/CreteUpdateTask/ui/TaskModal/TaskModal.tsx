@@ -42,7 +42,7 @@ export function TaskModal() {
         initialTaskData={{
           labels: taskParams?.labels ?? [],
           title: taskParams?.title ?? '',
-          day: taskParams?.day ?? '',
+          day: taskParams?.day ?? ''
         }}
         title={isNewTask ? 'Create task' : 'Update task'}
         buttonTitle={isNewTask ? 'Create' : 'Update'}

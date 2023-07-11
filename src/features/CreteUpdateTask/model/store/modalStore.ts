@@ -15,5 +15,5 @@ interface ModalState {
 export const useTaskModalStore = create<ModalState>()((set) => ({
   taskParams: null,
   setTaskParams: (i) => set(() => ({ taskParams: i })),
-  onReset: () => set(() => ({ taskParams: null })),
+  onReset: () => set(() => ({ taskParams: null }))
 }));

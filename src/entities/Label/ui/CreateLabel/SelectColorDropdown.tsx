@@ -9,7 +9,7 @@ interface SelectColorDropdownProps {
 
 export default function SelectColorDropdown({
   selected,
-  setSelected,
+  setSelected
 }: SelectColorDropdownProps) {
   const items = colors.filter((i) => i !== selected);
 

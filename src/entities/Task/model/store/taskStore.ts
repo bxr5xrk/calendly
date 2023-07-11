@@ -1,9 +1,9 @@
-import { getTasksFromLS } from "./../../lib/LS";
+import { getTasksFromLS } from './../../lib/LS';
 import { saveTasksToLS } from '@entities/Task/lib/LS';
 import { create } from 'zustand';
 import { Task } from '../types/task';
 
-const tasksFromLS = getTasksFromLS()
+const tasksFromLS = getTasksFromLS();
 
 interface TasksState {
   tasks: Task[];
@@ -28,5 +28,5 @@ export const useTasksStore = create<TasksState>()((set) => ({
       saveTasksToLS([...state.tasks, task]);
 
       return { tasks: [...state.tasks, task] };
-    }),
+    })
 }));
