@@ -56,34 +56,37 @@ export function Task({ id, date, title, labels }: TaskProps) {
   const onRemove = () => setTasks(tasks.filter((i) => i.id !== id));
 
   return (
-    <div className="group/item relative flex">
-      <GripVertical ref={setNodeRefDrag} className="w-5 h-5" />
-
+    <div className="group/item relative">
       <div
         ref={setNodeRefSort}
         style={style}
         {...attributesSort}
-        {...listenersDrag}
-        {...attributesDrag}
         {...listenersSort}
-        className="text-gray-600 border-purple-200 bg-purple-100 border rounded p-1 text-sm mb-1"
+        className="text-gray-600 flex items-center border-purple-200 bg-purple-100 border rounded p-1 text-sm mb-1"
       >
-        <div className="w-full h-full text-center">
+        <span {...listenersDrag} {...attributesDrag} ref={setNodeRefDrag}>
+          <GripVertical className="w-5 h-5" />
+        </span>
+
+        <div className="w-full h-full text-left">
           <ListLabelsReadonly labels={labels} />
-          <span className="text-center">{title}</span>
+          <span>{title}</span>
         </div>
       </div>
 
-      <Button
-        onClick={onEdit}
-        className="opacity-0 group-hover/item:opacity-100 transition"
-      >
-        <Edit2Icon className="w-5 h-5" />
-      </Button>
+      {/* edit */}
+      <span className="absolute top-0 bottom-0 right-1 flex items-center">
+        <Button
+          onClick={onEdit}
+          className="text-gray-500 bg-purple-100 w-5 h-5 rounded-full opacity-0 group-hover/item:opacity-100 transition"
+        >
+          <Edit2Icon className="w-4 h-4" />
+        </Button>
+      </span>
 
-      {/* remove button */}
+      {/* remove */}
       <Button
-        className="absolute opacity-0 group-hover/item:opacity-100 hover:opacity-100 z-1 -top-2 -right-2 p-0.5 rounded-full bg-red-100 text-red-500"
+        className="absolute opacity-0 group-hover/item:opacity-100 hover:opacity-100 transition-all p-1 z-1 -top-2 -right-2 rounded-full bg-red-100 text-red-500"
         theme="clear"
         size="clear"
         onClick={onRemove}

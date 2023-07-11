@@ -9,11 +9,11 @@ export function TaskModal() {
 
   const { onAppend, setTasks, tasks } = useTasksStore();
 
-  const onOpen = () => taskParams;
+  const onOpen = () => onReset();
 
   const open = !!taskParams;
 
-  const isNewTask = !('id' in taskParams!);
+  const isNewTask = taskParams ? !('id' in taskParams) : false;
 
   const onSubmit = (data: Omit<Task, 'id'>) => {
     if (isNewTask) {
@@ -23,7 +23,7 @@ export function TaskModal() {
     } else {
       setTasks(
         tasks.map((task) => {
-          if (taskParams.id === task.id) {
+          if (taskParams?.id === task.id) {
             return { ...task, ...data };
           }
 
